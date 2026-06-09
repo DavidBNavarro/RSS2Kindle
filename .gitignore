@@ -1,0 +1,6 @@
+*.pyc
+__pycache__/
+.DS_Store
+config.json
+node_modules/
+history.db

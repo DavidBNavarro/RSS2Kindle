@@ -1,0 +1,8 @@
+flask>=3.0
+flask-cors>=4.0
+requests>=2.31
+PyMuPDF>=1.24
+marker-pdf>=1.10
+ebooklib>=0.18
+trafilatura>=1.12
+Pillow>=10.0

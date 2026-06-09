@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Web2Kindle Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Web2Kindle Settings</h1>
+
+    <form id="config-form">
+  <div class="section">
+    <h2>Server</h2>
+    <label for="server-url">Server URL</label>
+    <input type="url" id="server-url" value="http://127.0.0.1:5001">
+    <p class="help">Default: http://127.0.0.1:5001 (local). Change for cloud-hosted server.</p>
+
+  </div>
+
+  <div class="section">
+    <h2>Paywall bypass</h2>
+    <label for="paywalled-hosts">Paywalled hosts</label>
+    <input type="text" id="paywalled-hosts" placeholder="theverge.com,wired.com,medium.com">
+    <p class="help">Comma-separated host fragments used to trigger the archive fallback.</p>
+
+    <label for="paywall-selectors">Paywall selectors</label>
+    <input type="text" id="paywall-selectors" placeholder="[data-paywall],[data-locked],.paywall">
+    <p class="help">Extra selectors to detect paywall overlays on other domains.</p>
+
+    <label for="archive-domains">Archive domains</label>
+    <input type="text" id="archive-domains" placeholder="https://archive.org,https://archive.ph,https://archive.is,https://archive.today">
+    <p class="help">Comma-separated archive mirrors. {{url}} is replaced with the encoded page URL.</p>
+
+    <label for="archive-timeout">Archive timeout (ms)</label>
+    <input type="number" id="archive-timeout" value="15000" min="5000" step="1000">
+    <p class="help">Maximum time to wait for an archive response per domain.</p>
+
+    <label for="archive-retries">Archive retries</label>
+    <input type="number" id="archive-retries" value="2" min="1" max="5">
+    <p class="help">How many times to retry each archive domain before moving on.</p>
+
+    <label for="archive-render">Render strategy</label>
+    <select id="archive-render">
+      <option value="iframe">Embed iframe (fast, sandboxed)</option>
+      <option value="srcdoc">Fetch HTML and render via srcdoc (cleaned)</option>
+    </select>
+    <p class="help">Iframe uses the archive directly; srcdoc strips risky scripts.</p>
+  </div>
+
+      <div class="section">
+        <h2>Kindle</h2>
+        <label for="kindle-email">Kindle email address(es)</label>
+        <input type="text" id="kindle-email" placeholder="you@kindle.com, other@kindle.com">
+        <p class="help">Separate multiple addresses with commas to send to all of them.</p>
+      </div>
+
+      <div class="section">
+        <h2>License</h2>
+        <p class="help">Unlock unlimited conversions with a Web2Kindle Pro license.</p>
+        <label for="license-key">License key</label>
+        <input type="text" id="license-key" placeholder="WK-XXXX-XXXX-XXXX" spellcheck="false">
+        <button type="button" id="btn-verify-license" class="btn btn-primary" style="margin-top:8px">Verify License</button>
+        <button type="button" id="btn-buy-license" class="btn btn-ghost" style="margin-top:4px">Buy Pro License</button>
+        <button type="button" id="btn-remove-license" class="btn btn-secondary" style="margin-top:4px">Remove License</button>
+        <p id="license-status" class="hidden" style="margin-top:8px;font-size:12.5px"></p>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Save Settings</button>
+      <p id="status-msg" class="hidden"></p>
+    </form>
+  </div>
+  <script src="license.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

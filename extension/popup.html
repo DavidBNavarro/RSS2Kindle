@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Web2Kindle <span id="pro-badge" class="pro-badge hidden">PRO</span></h1>
+    </div>
+
+    <!-- Page preview card -->
+    <div id="preview-card" class="preview-card hidden">
+      <div class="preview-meta">
+        <span id="type-badge" class="badge"></span>
+        <input id="preview-title" class="preview-title" type="text" spellcheck="false">
+      </div>
+      <p id="preview-snippet" class="preview-snippet hidden"></p>
+    </div>
+
+    <!-- Loading preview -->
+    <div id="preview-loading" class="preview-loading hidden">
+      <div class="spinner"></div>
+      <span>Fetching page info…</span>
+    </div>
+
+    <!-- Paste mode -->
+    <div id="paste-mode" class="hidden">
+      <span id="paste-badge" class="badge"></span>
+      <textarea id="paste-input" class="paste-input" rows="5"
+        placeholder="Paste a URL or article text…" spellcheck="false"></textarea>
+      <input id="paste-title" class="paste-title" type="text"
+        placeholder="Title (optional)" spellcheck="false">
+      <!-- Batch queue -->
+      <div id="batch-queue" class="batch-queue hidden">
+        <div id="batch-list" class="batch-list"></div>
+      </div>
+    </div>
+
+    <!-- Previously sent warning -->
+    <p id="prev-sent-warning" class="prev-sent hidden">Already sent to Kindle before.</p>
+    <p id="mode-note" class="note hidden"></p>
+    <p id="conversion-nudge" class="nudge hidden" style="margin-top:0;margin-bottom:6px"></p>
+
+    <!-- Actions -->
+    <div id="actions" class="hidden">
+      <div class="btn-row">
+        <button id="btn-kindle" class="btn btn-primary btn-flex">✉ Send to Kindle</button>
+        <button id="btn-download" class="btn btn-download btn-flex">⬇ Save EPUB</button>
+      </div>
+      <button id="btn-preview" class="btn btn-ghost">👁 Open Preview in New Tab</button>
+    </div>
+
+    <!-- Conversion options -->
+    <div id="options" class="options hidden">
+      <label><input type="checkbox" id="keep-images" checked> Keep images</label>
+      <label><input type="checkbox" id="keep-links" checked> Keep links</label>
+    </div>
+
+    <!-- Progress -->
+    <div id="progress" class="hidden" style="margin:12px 0">
+      <div style="padding:12px;background:#f0f7ff;border-radius:8px;text-align:center;color:#2563eb;font-size:13px">
+        Processing in new tab…
+      </div>
+    </div>
+
+    <!-- Result / Error -->
+    <p id="result-text" class="result hidden"></p>
+    <p id="error-text" class="error hidden"></p>
+    <button id="btn-retry" class="btn btn-secondary hidden">Retry</button>
+
+    <div class="footer">
+      <a href="#" id="paste-toggle">✂ Paste URL / text</a>
+      <a href="#" id="history-link">📚 History</a>
+      <a href="#" id="settings-link">⚙ Settings</a>
+    </div>
+  </div>
+  <script src="lib/readability.js"></script>
+  <script src="lib/jszip.min.js"></script>
+  <script src="article-extractor.js"></script>
+  <script src="conversion-counter.js"></script>
+  <script src="license.js"></script>
+  <script src="history-store.js"></script>
+  <script src="image-processor.js"></script>
+  <script src="epub-generator.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

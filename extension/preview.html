@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Preview</title>
+  <style>
+    body{font-family:Georgia,serif;font-size:18px;line-height:1.7;color:#222;max-width:700px;margin:44px auto 40px;padding:0 20px;}
+    h1{font-size:28px;line-height:1.3;margin:40px 0 8px;}
+    .meta{color:#666;font-size:14px;margin:0 0 30px;}
+    img{max-width:100%;height:auto;display:block;margin:20px auto;}
+    blockquote{border-left:3px solid #ccc;margin:20px 0;padding:4px 20px;color:#555;}
+    pre{background:#f5f5f5;padding:16px;border-radius:6px;overflow-x:auto;font-size:15px;}
+    code{background:#f0f0f0;padding:2px 6px;border-radius:3px;font-size:15px;}
+    pre code{background:none;padding:0;}
+    .p2k-bar{position:fixed;top:0;left:0;right:0;z-index:9999;background:#232f3e;padding:8px 16px;display:flex;align-items:center;gap:8px;box-shadow:0 2px 8px rgba(0,0,0,.25);font-family:system-ui,sans-serif;}
+    .p2k-bar .p2k-title{background:transparent;border:none;border-bottom:1px solid #666;color:#fff;font-size:13px;padding:2px 6px;outline:none;min-width:140px;max-width:280px;flex:1;}
+    .p2k-bar .p2k-title:focus{border-bottom-color:#ff9900;}
+    .p2k-bar button{background:#ff9900;color:#000;border:none;padding:6px 14px;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;}
+    .p2k-bar button:hover{background:#e88b00;}
+    .p2k-bar button.p2k-ghost{background:transparent;color:#fff;border:1px solid #666;font-weight:400;}
+    .p2k-bar button.p2k-ghost:hover{border-color:#ff9900;color:#ff9900;}
+    .p2k-bar button.p2k-ghost.active{background:#ff9900;color:#000;border-color:#ff9900;font-weight:600;}
+    .p2k-bar .p2k-msg{color:#aaa;font-size:11px;margin-left:auto;}
+    .p2k-section{position:relative;transition:opacity .3s,max-height .4s;}
+    .p2k-section.p2k-removed{opacity:0;max-height:0;overflow:hidden;margin:0;padding:0;pointer-events:none;}
+    body.p2k-editing .p2k-section{border:1px dashed #d1d5db;border-radius:6px;margin:12px 0;padding:12px 16px;}
+    body.p2k-editing .p2k-section:hover{border-color:#ff9900;}
+    .p2k-section .p2k-rm{display:none;position:absolute;top:4px;right:4px;z-index:10;background:#f3f4f6;border:1px solid #d1d5db;border-radius:4px;padding:0 6px;font-size:13px;cursor:pointer;opacity:0;transition:opacity .2s;line-height:22px;}
+    body.p2k-editing .p2k-section .p2k-rm{display:block;}
+    body.p2k-editing .p2k-section:hover .p2k-rm{opacity:1;}
+    .p2k-section .p2k-rm:hover{background:#ff9900;color:#fff;border-color:#ff9900;}
+    body.p2k-editing .p2k-section p:hover,
+    body.p2k-editing .p2k-section figure:hover,
+    body.p2k-editing .p2k-section .imgwrap:hover,
+    body.p2k-editing .p2k-section > img:hover,
+    body.p2k-editing .p2k-section blockquote:hover,
+    body.p2k-editing .p2k-section ul:hover,
+    body.p2k-editing .p2k-section ol:hover,
+    body.p2k-editing .p2k-section pre:hover,
+    body.p2k-editing .p2k-section h2:hover,
+    body.p2k-editing .p2k-section h3:hover,
+    body.p2k-editing .p2k-section h4:hover,
+    body.p2k-editing .p2k-section table:hover,
+    body.p2k-editing .p2k-section li:hover{cursor:pointer;outline:1px dashed #d1d5db;}
+    .p2k-selected{outline:2px solid #ff9900 !important;background:rgba(255,153,0,0.07) !important;}
+    .p2k-removed:not(.p2k-section){display:none !important;}
+    .imgwrap{position:relative;display:flex;flex-direction:column;align-items:center;}
+    .p2k-rot{position:absolute;top:8px;right:8px;z-index:20;background:rgba(35,47,62,.92);color:#fff;border:none;border-radius:999px;width:30px;height:30px;cursor:pointer;font:16px/30px system-ui;text-align:center;opacity:0;transition:opacity .2s;}
+    .imgwrap:hover .p2k-rot{opacity:1;}
+    .p2k-rot:hover{background:#ff9900;color:#000;}
+    .p2k-details{background:#f9f9f9;border-radius:8px;padding:16px;margin:24px 0;font-family:system-ui,sans-serif;font-size:13px;}
+    .p2k-details .details-table{width:100%;border-collapse:collapse;}
+    .p2k-details .details-table td{padding:4px 8px;border:none;}
+    .p2k-details .details-table td.label{color:#666;font-weight:600;width:120px;vertical-align:top;white-space:nowrap;}
+    .p2k-details .details-table td.value{color:#222;word-break:break-all;}
+    #loading{text-align:center;padding:60px 20px;color:#666;font-family:system-ui,sans-serif;}
+    #loading .spinner{width:24px;height:24px;border:3px solid #e2e8f0;border-top-color:#2563eb;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 12px;}
+    @keyframes spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <div id="loading">
+    <div class="spinner"></div>
+    <span>Loading preview…</span>
+  </div>
+  <script src="history-store.js"></script>
+  <script src="image-processor.js"></script>
+  <script src="preview.js"></script>
+</body>
+</html>
